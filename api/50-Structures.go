@@ -68,10 +68,14 @@ type Dates struct {
 // DONNEES APRES LES SORTIES DES FONCTIONS DE TRIES ET GESTIONS
 var VarFonctions Var_Fonctions
 
-// Structure globale des dates après modification
+// Structure globale des données après modification
+
 type Var_Fonctions struct {
 	// Map des dates formatées par ID
 	DATE_FINALE map[int][]string
+
+	// Map des lieux formatés par ID
+	LOCATIONS_FINALES map[int][]string
 }
 
 // --------------------------------------------------------------------------------------------------------------------------------- //

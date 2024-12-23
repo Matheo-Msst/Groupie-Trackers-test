@@ -20,7 +20,7 @@ func Enlever_Caracteres_Dates(TabStr []string) []string {
 		resultat = append(resultat, Str_Traiter)
 	}
 
-	// Retourner les dates nettoyées
+	// Retourner les dates nettoyées (15122017)
 	return resultat
 }
 

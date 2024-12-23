@@ -13,8 +13,14 @@ func main() {
 
 	// ------------------------------------------------------------------------------------------------------------//
 	fmt.Println("\n //////////////////////////// API LIEUX //////////////////////////// \n")
-	api.Api_Locations()
-	api.Afficher_Locations()
+	api.Api_Locations() // Récupérer les lieux depuis l'API
+
+	// Traitement et stockage des lieux formatés
+	api.Stocker_Lieux_Formates() // Traitement des lieux et stockage dans VarFonctions.LOCATIONS_FINALES
+
+	// Afficher les lieux formatés avec majuscule
+	api.Afficher_Lieux_avec_maj() // Affichage des lieux avec la mise en majuscule
+	// fmt.Println(api.VarFonctions.LOCATIONS_FINALES)
 
 	// ------------------------------------------------------------------------------------------------------------//
 	fmt.Println("\n //////////////////////////// API DATES //////////////////////////// \n")
@@ -22,14 +28,9 @@ func main() {
 
 	// Traitement des dates pour enlever les caractères et les formater
 	api.Stocker_Dates_Formatees()
-	// // Afficher les dates
-	// api.Afficher_Dates()
 
-	// Afficher les dates formatées
 	api.Afficher_Date_Formatees()
-
-	/* fmt.Println(api.VarFonctions.DATE_FINALE[1][0]) */ //DATE_FINALE[INDEX_DATES][DATE_PRECISE(EXEMPLE ICI LA PREMIER A L'INDEX 0)]
-
+	// fmt.Println(api.VarFonctions.DATE_FINALE)
 	// ------------------------------------------------------------------------------------------------------------//
 	fmt.Println("\n //////////////////////////// API RELATIONS //////////////////////////// \n")
 	api.Api_Relations()
