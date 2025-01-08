@@ -2,17 +2,14 @@ package api
 
 import (
 	"encoding/json"
+	"fmt"
+	"groupie-tracker/structures"
 	"io"
 	"log"
 	"net/http"
 )
 
-// ------------------------------------------------------------------------------------------------------------------------------------------------------
-// --------------------------------------------------------------------------------------------| API DATES |---------------------------------------------
-// ------------------------------------------------------------------------------------------------------------------------------------------------------
-
-// Fonction pour récupérer les dates depuis l'API et les intégrer dans la structure globale
-func Api_dates() []Globale_Structure_Donnees {
+func Api_dates() {
 	dat := "https://groupietrackers.herokuapp.com/api/dates"
 
 	// Faire une requête HTTP GET
@@ -32,36 +29,29 @@ func Api_dates() []Globale_Structure_Donnees {
 		log.Fatalf("Erreur lors de la lecture de la réponse : %v", err)
 	}
 
-	var apiDates ApiDATES
-	if err := json.Unmarshal(body, &apiDates); err != nil {
+	// Désérialiser les données JSON
+
+	if err := json.Unmarshal(body, &structures.IndexDates); err != nil {
 		log.Fatalf("Erreur lors du décodage du JSON : %v", err)
 	}
 
-	// Si la liste des dates est vide, retourner une liste vide
-	if len(apiDates.Index) == 0 {
-		return nil
-	}
-
-	// Créer une liste pour stocker les informations de toutes les dates
-	var allDates []Globale_Structure_Donnees
-
-	// Parcourir chaque index et remplir la structure Globale_Structure_Donnees
-	for _, date := range apiDates.Index {
-		// Créer une nouvelle instance de Globale_Structure_Donnees pour chaque date
-		dateData := Globale_Structure_Donnees{
-			ID_DATES:    date.Id,
-			DATES_DATES: date.Dates,
-			INDEX_DATES: len(date.Dates),
-		}
-
-		// Ajouter l'objet dateData à la liste allDates
-		allDates = append(allDates, dateData)
-	}
-
-	// Retourner la liste de toutes les dates
-	return allDates
 }
 
-// ------------------------------------------------------------------------------------------------------------------------------------------------------
-// ------------------------------------------------------------------------------------------------------------------------------------------------------
-// ------------------------------------------------------------------------------------------------------------------------------------------------------
+func AfficherDates() {
+	// Afficher les premiers éléments
+
+	for i, dates := range structures.IndexDates.Index {
+		if i >= structures.ElementAfficher {
+			break
+		}
+
+		// Affiche l'ID
+		fmt.Printf("ID: %d\n", dates.Id)
+
+		// Affiche chaque lieu dans Locations
+		fmt.Println("Dates :")
+		for j, lieu := range dates.Dates {
+			fmt.Printf("  %d. %s\n", j+1, lieu)
+		}
+	}
+}
